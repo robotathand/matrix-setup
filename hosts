@@ -1,0 +1,5 @@
+all:
+  hosts:
+    matrix:
+      ansible_host: 192.168.30.41
+      ansible_user: root
