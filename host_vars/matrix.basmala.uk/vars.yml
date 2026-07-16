@@ -26,7 +26,7 @@ matrix_homeserver_implementation: synapse
 
 # A secret used as a base, for generating various other secrets.
 # You can put any string here, but generating a strong one is preferred. You can create one with a command like `pwgen -s 64 1`.
-matrix_homeserver_generic_secret_key: '{{ matrix_homeserver_generic_secret_key }}'
+## matrix_homeserver_generic_secret_key: '{{ matrix_homeserver_generic_secret_key }}'
 
 # By default, the playbook manages its own Traefik (https://doc.traefik.io/traefik/) reverse-proxy server.
 # It will retrieve SSL certificates for you on-demand and forward requests to all other components.
@@ -78,7 +78,7 @@ devture_systemd_docker_base_ipv6_enabled: true
 #
 # Changing this value subsequently requires manual work.
 # The value used here must be shorter than 100 characters.
-postgres_connection_password: '{{ postgres_connection_password }}'
+## postgres_connection_password: '{{ postgres_connection_password }}'
 
 # You can limit heavy room joins on constrained hosts.
 # See:
@@ -91,7 +91,7 @@ postgres_connection_password: '{{ postgres_connection_password }}'
 matrix_authentication_service_enabled: true
 
 # Generate this encryption secret with: `openssl rand -hex 32`
-matrix_authentication_service_config_secrets_encryption: '{{ matrix_authentication_service_config_secrets_encryption }}'
+## matrix_authentication_service_config_secrets_encryption: '{{ matrix_authentication_service_config_secrets_encryption }}'
 
 # When migrating an existing homeserver to Matrix Authentication Service, uncomment the line below.
 # Learn more about the migration process in the "Marking an existing homeserver for migration" section below.
@@ -159,7 +159,7 @@ matrix_bot_matrix_reminder_bot_enabled: true
 # matrix_bot_matrix_reminder_bot_matrix_user_id_localpart: bot.matrix-reminder-bot
 
 # Generate a strong password for the bot. You can create one with a command like `pwgen -s 64 1`.
-matrix_bot_matrix_reminder_bot_matrix_user_password: '{{ matrix_bot_matrix_reminder_bot_matrix_user_password }}'
+## matrix_bot_matrix_reminder_bot_matrix_user_password: '{{ matrix_bot_matrix_reminder_bot_matrix_user_password }}'
 
 # Adjust this to your timezone
 matrix_bot_matrix_reminder_bot_reminders_timezone: Europe/London
