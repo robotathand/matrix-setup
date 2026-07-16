@@ -93,6 +93,9 @@ matrix_authentication_service_enabled: true
 # Generate this encryption secret with: `openssl rand -hex 32`
 ## matrix_authentication_service_config_secrets_encryption: '{{ matrix_authentication_service_config_secrets_encryption }}'
 
+matrix_authentication_service_config_account_password_registration_enabled: true
+matrix_authentication_service_config_account_registration_token_required: true
+
 # When migrating an existing homeserver to Matrix Authentication Service, uncomment the line below.
 # Learn more about the migration process in the "Marking an existing homeserver for migration" section below.
 # For brand-new installations which start directly on MAS, this line can be removed.
@@ -100,9 +103,12 @@ matrix_authentication_service_enabled: true
 
 matrix_synapse_auto_compressor_enabled: true
 
+matrix_synapse_media_retention_remote_media_lifetime: "30d"
+
 matrix_admin: '@admin:{{ matrix_domain }}'
 
 matrix_ketesa_enabled: true
+#matrix_synapse_hostname: '{{ matrix_server_fqn_matrix }}'
 matrix_ketesa_path_prefix: /ketesa
 
 matrix_appservice_double_puppet_enabled: true
