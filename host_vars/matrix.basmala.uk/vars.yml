@@ -101,6 +101,13 @@ matrix_authentication_service_config_account_registration_token_required: true
 # For brand-new installations which start directly on MAS, this line can be removed.
 # matrix_authentication_service_migration_in_progress: true
 
+exim_relay_relay_use: true
+exim_relay_relay_host_name: "mail-eu.smtp2go.com"
+exim_relay_relay_protocol: "smtps"
+exim_relay_relay_auth: true
+exim_relay_relay_auth_username: "basmala-matrix"
+## exim_relay_relay_auth_password: ''
+
 matrix_synapse_auto_compressor_enabled: true
 
 matrix_synapse_media_retention_remote_media_lifetime: "30d"
