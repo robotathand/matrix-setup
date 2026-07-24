@@ -104,9 +104,10 @@ matrix_authentication_service_config_account_registration_token_required: true
 exim_relay_relay_use: true
 exim_relay_relay_host_name: "mail-eu.smtp2go.com"
 exim_relay_relay_protocol: "smtps"
+exim_relay_relay_host_port: 587
 exim_relay_relay_auth: true
 exim_relay_relay_auth_username: "basmala-matrix"
-## exim_relay_relay_auth_password: ''
+## exim_relay_relay_auth_password: '{{ exim_relay_relay_auth_password }}'
 
 matrix_synapse_auto_compressor_enabled: true
 
