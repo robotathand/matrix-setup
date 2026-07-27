@@ -115,26 +115,12 @@ matrix_synapse_media_retention_remote_media_lifetime: "30d"
 
 matrix_admin: '@admin:{{ matrix_domain }}'
 
+# matrix_synapse_hostname: '{{ matrix_server_fqn_matrix }}'
+
 matrix_ketesa_enabled: true
-#matrix_synapse_hostname: '{{ matrix_server_fqn_matrix }}'
 matrix_ketesa_path_prefix: /ketesa
 
-matrix_appservice_double_puppet_enabled: true
-
-matrix_bridges_encryption_enabled: true
-matrix_bridges_encryption_default: true
-
-matrix_bridge_mautrix_whatsapp_enabled: true
-# Put in vault for privacy #
-# matrix_mautrix_whatsapp_configuration_extension_yaml: |
-#   bridge:
-#     permissions:
-#       # 1. Deny access to everyone else on your domain by default
-#       "basmala.uk": "deny"
-
-#       # 2. Grant specific access to allowed users
-#       "@userA-whatsapp:basmala.uk": "admin"
-#       "@userB:basmala.uk": "user"
+# TODO: Put whatsapp bridge on dedicated host
 
 ## matrix_bot_baibot_enabled: true
 
