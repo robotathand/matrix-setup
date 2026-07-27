@@ -166,7 +166,8 @@ matrix_ketesa_path_prefix: /ketesa
 # Changing this subsequently will make you lose your configuration.
 ## matrix_bot_baibot_config_persistence_config_encryption_key: '{{ matrix_bot_baibot_config_persistence_config_encryption_key }}'
 
-matrix_bot_matrix_reminder_bot_enabled: true
+# TODO: Check functionaity then (re)enable
+# matrix_bot_matrix_reminder_bot_enabled: true
 
 # Uncomment and adjust this part if you'd like to use a username different than the default
 # matrix_bot_matrix_reminder_bot_matrix_user_id_localpart: bot.matrix-reminder-bot
