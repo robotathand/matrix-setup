@@ -103,7 +103,7 @@ matrix_authentication_service_config_account_registration_token_required: true
 
 exim_relay_relay_use: true
 exim_relay_relay_host_name: "mail-eu.smtp2go.com"
-exim_relay_relay_protocol: "smtps"
+exim_relay_relay_protocol: "smtp"
 exim_relay_relay_host_port: 587
 exim_relay_relay_auth: true
 exim_relay_relay_auth_username: "basmala-matrix"
@@ -121,7 +121,20 @@ matrix_ketesa_path_prefix: /ketesa
 
 matrix_appservice_double_puppet_enabled: true
 
-matrix_mautrix_whatsapp_enabled: true
+matrix_bridges_encryption_enabled: true
+matrix_bridges_encryption_default: true
+
+matrix_bridge_mautrix_whatsapp_enabled: true
+# Put in vault for privacy #
+# matrix_mautrix_whatsapp_configuration_extension_yaml: |
+#   bridge:
+#     permissions:
+#       # 1. Deny access to everyone else on your domain by default
+#       "basmala.uk": "deny"
+
+#       # 2. Grant specific access to allowed users
+#       "@userA-whatsapp:basmala.uk": "admin"
+#       "@userB:basmala.uk": "user"
 
 ## matrix_bot_baibot_enabled: true
 
@@ -156,7 +169,7 @@ matrix_mautrix_whatsapp_enabled: true
 # An optional secret for encrypting the bot's session data (see `matrix_bot_baibot_data_path`).
 # This must be 32-bytes (64 characters when HEX-encoded).
 # Generate it with: `openssl rand -hex 32`
-# Set to null or empty to avoid using encryption.
+# Set to null or empty to avoid using encryption.g
 # Changing this subsequently requires that you also throw away all data (see `matrix_bot_baibot_data_path`)
 ## matrix_bot_baibot_config_persistence_session_encryption_key: '{{ matrix_bot_baibot_config_persistence_session_encryption_key }}'
 
