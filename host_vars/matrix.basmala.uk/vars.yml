@@ -32,28 +32,54 @@ matrix_homeserver_implementation: synapse
 # It will retrieve SSL certificates for you on-demand and forward requests to all other components.
 # For alternatives, see `docs/configuring-playbook-own-webserver.md`.
 matrix_playbook_reverse_proxy_type: playbook-managed-traefik
+
+# Ensure that public urls use https
 matrix_playbook_ssl_enabled: true
 
-# Fronting: disable Traefik's own TLS/ACME, bind locally for Caddy to reach
+# Disable the web-secure (port 443) endpoint, which also disables SSL certificate retrieval.
+# This has the side-effect of also automatically disabling TLS for the matrix-federation entrypoint
+# (by toggling `matrix_federation_traefik_entrypoint_tls`).
 traefik_config_entrypoint_web_secure_enabled: false
-traefik_container_web_host_bind_port: '192.168.30.41:81'
-traefik_config_entrypoint_web_forwardedHeaders_insecure: false
+
+# If your reverse-proxy runs on another machine, consider using `0.0.0.0:81`, just `81` or `SOME_IP_ADDRESS_OF_THIS_MACHINE:81`
+traefik_container_web_host_bind_port: '81'
+
+# We bind to `127.0.0.1` by default (see above), so trusting `X-Forwarded-*` headers from
+# a reverse-proxy running on the local machine is safe enough.
+# If you're publishing the port (`traefik_container_web_host_bind_port` above) to a public network interface:
+# - remove the `traefik_config_entrypoint_web_forwardedHeaders_insecure` variable definition below
+# - uncomment and adjust the `traefik_config_entrypoint_web_forwardedHeaders_trustedIPs` line below
+# traefik_config_entrypoint_web_forwardedHeaders_insecure: true
 traefik_config_entrypoint_web_forwardedHeaders_trustedIPs: ['192.168.30.21']
 
-# Federation on its own local port, distinct from the public 8448
-matrix_playbook_public_matrix_federation_api_traefik_entrypoint_host_bind_port: '192.168.30.41:8449'
+# Expose the federation entrypoint on a custom port (other than port 8448, which is normally used publicly).
+#
+# We bind to `127.0.0.1` by default (see above), so trusting `X-Forwarded-*` headers from
+# a reverse-proxy running on the local machine is safe enough.
+#
+# If your reverse-proxy runs on another machine, consider:
+# - using `0.0.0.0:8449`, just `8449` or `SOME_IP_ADDRESS_OF_THIS_MACHINE:8449` below
+# - adjusting `matrix_playbook_public_matrix_federation_api_traefik_entrypoint_config_custom` (below) - removing `insecure: true` and enabling/configuring `trustedIPs`
+matrix_playbook_public_matrix_federation_api_traefik_entrypoint_host_bind_port: '8449'
+
+# Disable HTTP/3 for the federation entrypoint.
+# If you'd like HTTP/3, consider configuring it for your other reverse-proxy.
+#
+# Disabling this also sets `matrix_playbook_public_matrix_federation_api_traefik_entrypoint_host_bind_port_udp` to an empty value.
+# If you'd like to keep HTTP/3 enabled here (for whatever reason), you may wish to explicitly
+# set `matrix_playbook_public_matrix_federation_api_traefik_entrypoint_host_bind_port_udp` to something like '127.0.0.1:8449'.
 matrix_playbook_public_matrix_federation_api_traefik_entrypoint_config_http3_enabled: false
+
+# Depending on the value of `matrix_playbook_public_matrix_federation_api_traefik_entrypoint_host_bind_port` above,
+# this may need to be reconfigured. See the comments above.
 matrix_playbook_public_matrix_federation_api_traefik_entrypoint_config_custom:
   forwardedHeaders:
+    # insecure: true
     trustedIPs: ['192.168.30.21']
 
 # Enable the Matrix RTC stack.
 # This provides all supporting services for Element Call, without the Element Call frontend.
 matrix_rtc_enabled: true
-
-# LiveKit
-livekit_server_hostname: "livekit.basmala.uk"
-livekit_server_config_turn_enabled: true
 
 # Controls whether container networks will be created with IPv6 support.
 #
